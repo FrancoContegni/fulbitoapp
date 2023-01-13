@@ -21,13 +21,7 @@ export default function Home({englands}) {
       {
         englands.map(({_id, team, logo, name}) => (
           <div key={_id}>
-<<<<<<< HEAD
-            <img src={logo} ></img>
-
-
-=======
-                <img src={logo} ></img>
->>>>>>> 76a01b90a31c3463d985fba3cf33e575337a17fd
+            <img src={logo}></img>
           <h5>{name}</h5>
           </div>
         ))
