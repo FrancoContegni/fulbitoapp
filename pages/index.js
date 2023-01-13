@@ -20,12 +20,7 @@ export default function Home({englands}) {
       {
         englands.map(({_id, team, logo, name}) => (
           <div key={_id}>
-          <img
-          src={logo}
-          alt="Picture of the author"
-          width={50}
-          height={50}
-        />
+        
           <h5>{name}</h5>
           </div>
         ))
