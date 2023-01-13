@@ -1,14 +1,12 @@
-import { Inter } from '@next/font/google';
+"use client"
+
 import Head from 'next/head'
-import styles from '../styles/Home.module.css';
 import conectarDB from '../lib/dbConnect';
 import england from '../models/england';
 import React from 'react';
-import Image from 'next/image';
-
 
 export default function Home({englands}) {
-  console.log(englands)
+  
   return (
     <div>
       <Head>
@@ -21,13 +19,7 @@ export default function Home({englands}) {
       {
         englands.map(({_id, team, logo, name}) => (
           <div key={_id}>
-<<<<<<< HEAD
-            <img src={logo} ></img>
-
-
-=======
-                <img src={logo} ></img>
->>>>>>> 76a01b90a31c3463d985fba3cf33e575337a17fd
+            <img src={logo}></img>
           <h5>{name}</h5>
           </div>
         ))
@@ -48,7 +40,6 @@ export async function getServerSideProps(){
       england._id = `${england._id}`
       return england
     })
-
     //console.log(res)
     return {props: {englands}}
   } catch (error){
