@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css';
 import conectarDB from '../lib/dbConnect';
 import england from '../models/england';
 import React from 'react';
+import Image from 'next/image';
 
 
 export default function Home({englands}) {
@@ -20,7 +21,9 @@ export default function Home({englands}) {
       {
         englands.map(({_id, team, logo, name}) => (
           <div key={_id}>
-        
+            <img src={logo} ></img>
+
+
           <h5>{name}</h5>
           </div>
         ))
