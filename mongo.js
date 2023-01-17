@@ -32,7 +32,7 @@ const dataSchema = new mongoose.Schema({
 
 });
 
-export const DataModel = mongoose.model('england', dataSchema);
+const DataModel = mongoose.model('england', dataSchema);
 
 // Hacer la llamada a la API aquí
 axios.request(options).then(function (response) {
