@@ -1,17 +1,18 @@
 
 const mongoose = require('mongoose');
-const password = require('./password.js') 
 const axios = require("axios")
+import { verifySignature } from "@upstash/qstash/nextjs";
 
 
 
-const connectionString = `mongodb+srv://fotocopiero:${password}@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority`
+const connectionString = `mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority`
 
 mongoose.connect(connectionString).then(() => {
     console.log('Database connected');
 }).catch(err => {
     console.error(err);
 });
+
 
 
 const options = {
@@ -32,27 +33,35 @@ const dataSchema = new mongoose.Schema({
 
 });
 
-export const DataModel = mongoose.model('england', dataSchema);
+const DataModel = mongoose.model('england', dataSchema);
 
 // Hacer la llamada a la API aquí
-axios.request(options).then(function (response) {
-    // Crear un nuevo documento en la base de datos utilizando el modelo de Mongoose
-    const data = new DataModel({
-        team: response.data.parameters.team,
-        form: response.data.form,
-        logo: response.data.response.team.logo,
-        name: response.data.response.team.name
-    });
-    data.save(function (error) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log("Documento guardado exitosamente");
-        }
-    });
-}).catch(function (error) {
-    console.error(error);
-});
+async function handler() {
+    try {
+        const response = await axios.request(options);
+        // Crear un nuevo documento en la base de datos utilizando el modelo de Mongoose
+        const data = new DataModel({
+            team: response.data.parameters.team,
+            form: response.data.form,
+            logo: response.data.response.team.logo,
+            name: response.data.response.team.name
+        });
+        data.save(function (error) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Documento guardado exitosamente");
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
 
+export default verifySignature(handler);
 
-
+export const config = {
+    api: {
+      bodyParser: false,
+    },
+  };
