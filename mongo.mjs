@@ -1,20 +1,18 @@
-
-
-
 import { verifySignature } from "@upstash/qstash/nextjs";
 import mongoose from "mongoose";
 import axios from "axios";
+async function handler() {
+    try {
+const connectionString = process.env.URI_MONGO
+const QSTASH_CURRENT_SIGNING_KEY = process.env.QSTASH_CURRENT_SIGNING_KEY
+const QSTASH_NEXT_SIGNING_KEY = process.env.QSTASH_NEXT_SIGNING_KEY
 
-
-const connectionString = `mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority`
 
 mongoose.connect(connectionString).then(() => {
     console.log('Database connected');
 }).catch(err => {
     console.error(err);
 });
-
-
 
 const options = {
     method: 'GET',
@@ -37,8 +35,7 @@ const dataSchema = new mongoose.Schema({
 const DataModel = mongoose.model('england', dataSchema);
 
 // Hacer la llamada a la API aquí
-async function handler() {
-    try {
+
         const response = await axios.request(options);
         // Crear un nuevo documento en la base de datos utilizando el modelo de Mongoose
         const data = new DataModel({
