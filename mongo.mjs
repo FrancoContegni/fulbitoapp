@@ -1,8 +1,9 @@
 
-const mongoose = require('mongoose');
-const axios = require("axios")
-import { verifySignature } from "@upstash/qstash/nextjs";
 
+
+import { verifySignature } from "@upstash/qstash/nextjs";
+import mongoose from "mongoose";
+import axios from "axios";
 
 
 const connectionString = `mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority`
