@@ -4,11 +4,11 @@ const verifySignature = require("@upstash/qstash/nextjs").verifySignature;
 
 const URI_MONGO = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority"
 
-
 process.env.QSTASH_CURRENT_SIGNING_KEY = "sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2";
 process.env.QSTASH_NEXT_SIGNING_KEY = "sig_5Xyzim7UERfyEoUzA39feZCDEkko";
 verifySignature(handler);
 
+async function handler(req, res) {
 
 mongoose.connect(URI_MONGO).then(() => {
     console.log('Database connected');
@@ -16,7 +16,7 @@ mongoose.connect(URI_MONGO).then(() => {
     console.error(err);
 });
 
-async function handler(req, res) {
+
 
     const options = {
         method: 'GET',
@@ -69,3 +69,4 @@ module.exports.config = {
     bodyParser: false,
   },
 };
+
