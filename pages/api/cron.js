@@ -62,8 +62,8 @@ console.log('datamodel');
     res.status(200).end();
 }
 
-process.env.QSTASH_CURRENT_SIGNING_KEY = "sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2";
-process.env.QSTASH_NEXT_SIGNING_KEY = "sig_5Xyzim7UERfyEoUzA39feZCDEkko";
+process.env.QSTASH_CURRENT_SIGNING_KEY = "QSTASH_CURRENT_SIGNING_KEY";
+process.env.QSTASH_NEXT_SIGNING_KEY = "QSTASH_NEXT_SIGNING_KEY";
 verifySignature(handler);
 
 module.exports = verifySignature(handler);
