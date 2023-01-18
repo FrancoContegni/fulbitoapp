@@ -1,6 +1,5 @@
 "use client"
 
-import { Inter } from '@next/font/google';
 import Head from 'next/head'
 import conectarDB from '../lib/dbConnect';
 import england from '../models/england';
