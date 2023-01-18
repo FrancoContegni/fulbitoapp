@@ -4,17 +4,11 @@ const verifySignature = require("@upstash/qstash/nextjs").verifySignature;
 
 const URI_MONGO = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority"
 
-
-
-
-
 mongoose.connect(URI_MONGO).then(() => {
     console.log('Database connected');
 }).catch(err => {
     console.error(err);
 });
-
-
 
     const options = {
         method: 'GET',
@@ -31,14 +25,14 @@ mongoose.connect(URI_MONGO).then(() => {
         form: String,
         logo: String,
         name: String
-    
+
     });
     console.log('dataschema');
     const DataModel = mongoose.model('england', dataSchema);
 
 console.log('datamodel');
 
-    async function handler(_req, res) {
+    async function handler(req, res) {
         console.log("If this is printed, the signature has already been verified");
     // Hacer la llamada a la API aquí
     axios.request(options).then(function (response) {
