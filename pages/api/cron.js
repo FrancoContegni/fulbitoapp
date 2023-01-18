@@ -1,22 +1,17 @@
 const mongoose = require('mongoose');
 const axios = require("axios");
-const verifySignature = require("@upstash/qstash/nextjs");
+const cron = require("node-cron");
 
-QSTASH_CURRENT_SIGNING_KEY=sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2
-QSTASH_NEXT_SIGNING_KEY=sig_5Xyzim7UERfyEoUzA39feZCDEkko
+const URI_MONGO = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority"
 
-async function handler(req, res) {
-    console.log("If this is printed, the signature has already been verified");
-  
-    const URI_MONGO = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority"
+mongoose.connect(URI_MONGO).then(() => {
+    console.log('Database connected');
+}).catch(err => {
+    console.error(err);
+});
 
-    mongoose.connect(URI_MONGO).then(() => {
-        console.log('Database connected');
-    }).catch(err => {
-        console.error(err);
-    });
-    
-    
+
+
     const options = {
         method: 'GET',
         url: 'https://api-football-v1.p.rapidapi.com/v3/teams/statistics',
@@ -36,7 +31,7 @@ async function handler(req, res) {
     });
     
     const DataModel = mongoose.model('england', dataSchema);
-    
+    cron.schedule("0-59 * * * *", () => {
     // Hacer la llamada a la API aquí
     axios.request(options).then(function (response) {
         // Crear un nuevo documento en la base de datos utilizando el modelo de Mongoose
@@ -56,16 +51,4 @@ async function handler(req, res) {
     }).catch(function (error) {
         console.error(error);
     });
-
-    res.status(200).end();
-  }
-  
-  export default verifySignature(handler);
-  
-  export const config = {
-    api: {
-      bodyParser: false,
-    },
-  };
-
-
+});
