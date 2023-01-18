@@ -1,11 +1,15 @@
 import { verifySignature } from "@upstash/qstash/nextjs";
 import mongoose from "mongoose";
 import axios from "axios";
+
+const QSTASH_CURRENT_SIGNING_KEY = process.env.QSTASH_CURRENT_SIGNING_KEY
+const QSTASH_NEXT_SIGNING_KEY = process.env.QSTASH_NEXT_SIGNING_KEY
+
+
 async function handler() {
     try {
 const connectionString = process.env.URI_MONGO
-const QSTASH_CURRENT_SIGNING_KEY = process.env.QSTASH_CURRENT_SIGNING_KEY
-const QSTASH_NEXT_SIGNING_KEY = process.env.QSTASH_NEXT_SIGNING_KEY
+
 
 
 mongoose.connect(connectionString).then(() => {
