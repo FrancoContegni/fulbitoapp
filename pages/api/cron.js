@@ -16,7 +16,7 @@ mongoose.connect(URI_MONGO).then(() => {
     console.error(err);
 });
 
-
+async function handler(req, res) {
 
     const options = {
         method: 'GET',
@@ -39,7 +39,7 @@ mongoose.connect(URI_MONGO).then(() => {
     const DataModel = mongoose.model('england', dataSchema);
 
 
-    async function handler(req, res) {
+
     // Hacer la llamada a la API aquí
     axios.request(options).then(function (response) {
         // Crear un nuevo documento en la base de datos utilizando el modelo de Mongoose
