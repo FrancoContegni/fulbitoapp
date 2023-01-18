@@ -8,7 +8,7 @@ process.env.QSTASH_CURRENT_SIGNING_KEY = "sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2";
 process.env.QSTASH_NEXT_SIGNING_KEY = "sig_5Xyzim7UERfyEoUzA39feZCDEkko";
 verifySignature(handler);
 
-async function handler(req, res) {
+
 
 mongoose.connect(URI_MONGO).then(() => {
     console.log('Database connected');
@@ -40,6 +40,8 @@ mongoose.connect(URI_MONGO).then(() => {
 
 
 
+    async function handler(req, res) {
+        console.log("If this is printed, the signature has already been verified");
     // Hacer la llamada a la API aquí
     axios.request(options).then(function (response) {
         // Crear un nuevo documento en la base de datos utilizando el modelo de Mongoose
