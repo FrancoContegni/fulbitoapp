@@ -4,11 +4,17 @@ const verifySignature = require("@upstash/qstash/nextjs").verifySignature;
 
 const URI_MONGO = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority"
 
+
+
+
+
 mongoose.connect(URI_MONGO).then(() => {
     console.log('Database connected');
 }).catch(err => {
     console.error(err);
 });
+
+
 
     const options = {
         method: 'GET',
@@ -25,7 +31,7 @@ mongoose.connect(URI_MONGO).then(() => {
         form: String,
         logo: String,
         name: String
-
+    
     });
     console.log('dataschema');
     const DataModel = mongoose.model('england', dataSchema);
@@ -56,8 +62,8 @@ console.log('datamodel');
     res.status(200).end();
 }
 
-process.env.QSTASH_CURRENT_SIGNING_KEY = "QSTASH_CURRENT_SIGNING_KEY";
-process.env.QSTASH_NEXT_SIGNING_KEY = "QSTASH_NEXT_SIGNING_KEY";
+process.env.QSTASH_CURRENT_SIGNING_KEY = "sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2";
+process.env.QSTASH_NEXT_SIGNING_KEY = "sig_5Xyzim7UERfyEoUzA39feZCDEkko";
 verifySignature(handler);
 
 module.exports = verifySignature(handler);
