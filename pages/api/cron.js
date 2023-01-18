@@ -21,7 +21,7 @@ mongoose.connect(URI_MONGO).then(() => {
             'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
         }
     };
-    
+     
     const dataSchema = new mongoose.Schema({
         team: String,
         form: String,
