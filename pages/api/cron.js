@@ -27,7 +27,7 @@ mongoose.connect(URI_MONGO).then(() => {
             'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
         }
     };
-     
+     console.log('options');
     const dataSchema = new mongoose.Schema({
         team: String,
         form: String,
@@ -35,10 +35,10 @@ mongoose.connect(URI_MONGO).then(() => {
         name: String
     
     });
-    
+    console.log('dataschema');
     const DataModel = mongoose.model('england', dataSchema);
 
-
+console.log('datamodel');
 
     async function handler(req, res) {
         console.log("If this is printed, the signature has already been verified");
