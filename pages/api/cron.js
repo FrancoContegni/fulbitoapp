@@ -38,7 +38,7 @@ mongoose.connect(URI_MONGO).then(() => {
 
 console.log('datamodel');
 
-    async function handler(req, res) {
+    async function handler(_req, res) {
         console.log("If this is printed, the signature has already been verified");
     // Hacer la llamada a la API aquí
     axios.request(options).then(function (response) {
