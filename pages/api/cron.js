@@ -4,7 +4,9 @@ const verifySignature = require("@upstash/qstash/nextjs").verifySignature;
 
 const URI_MONGO = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority"
 
-
+process.env.QSTASH_CURRENT_SIGNING_KEY = "sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2";
+process.env.QSTASH_NEXT_SIGNING_KEY = "sig_5Xyzim7UERfyEoUzA39feZCDEkko";
+verifySignature(handler);
 
 
 
@@ -38,7 +40,7 @@ mongoose.connect(URI_MONGO).then(() => {
 
 console.log('datamodel');
 
-    async function handler(req, res) {
+async function handler(_req, res) {
         console.log("If this is printed, the signature has already been verified");
     // Hacer la llamada a la API aquí
     axios.request(options).then(function (response) {
@@ -59,14 +61,11 @@ console.log('datamodel');
     }).catch(function (error) {
         console.error(error);
     });
-    res.status(200).end();
 }
 
-process.env.QSTASH_CURRENT_SIGNING_KEY = "sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2";
-process.env.QSTASH_NEXT_SIGNING_KEY = "sig_5Xyzim7UERfyEoUzA39feZCDEkko";
-verifySignature(handler);
 
-module.exports = verifySignature(handler);
+
+module.exports = handler();
 
 module.exports.config = {
   api: {
