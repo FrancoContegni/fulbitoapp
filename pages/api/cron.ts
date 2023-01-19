@@ -55,5 +55,3 @@ export const config = {
         bodyParser: false,
     },
 };
-
-export default verifySignature(handler);
