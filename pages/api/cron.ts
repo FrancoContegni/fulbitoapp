@@ -59,4 +59,3 @@ res.send("OK");
     },
     };
 
-export{};
