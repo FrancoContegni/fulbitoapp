@@ -23,7 +23,7 @@ const teamSchema = new mongoose.Schema({
 
 const Team = mongoose.model("Team", teamSchema);
 
-export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     try {
         const result = await axios({
             method: 'GET',
@@ -50,8 +50,12 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 }
 
+export default verifySignature(handler);
+
 export const config = {
     api: {
         bodyParser: false,
     },
 };
+
+
