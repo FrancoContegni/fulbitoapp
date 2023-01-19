@@ -7,7 +7,6 @@ const URI_MONGO = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.m
 
 process.env.QSTASH_CURRENT_SIGNING_KEY = "sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2";
 process.env.QSTASH_NEXT_SIGNING_KEY = "sig_5Xyzim7UERfyEoUzA39feZCDEkko";
-verifySignature(handler);
 
 mongoose.connect(URI_MONGO).then(() => {
     console.log('Database connected');
@@ -15,47 +14,46 @@ mongoose.connect(URI_MONGO).then(() => {
     console.error(err);
 });
 
-
 const teamSchema = new mongoose.Schema({
-league: Number,
-season: Number,
-team: Number,
-data: {}
+    league: Number,
+    season: Number,
+    team: Number,
+    data: {}
 });
+
 const Team = mongoose.model("Team", teamSchema);
 
-async function handler(_req: NextApiRequest, res: NextApiResponse) {
-try {
-const result = await axios({
-method: 'GET',
-url: 'https://api-football-v1.p.rapidapi.com/v3/teams/statistics',
-headers: {
-'X-RapidAPI-Key': '64e1a0803emsh90496dace2b1354p1de268jsn1bb15e616fca',
-'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
-},
-params: {
-league: '39',
-season: '2020',
-team: '33'
-}
-});
+export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+    try {
+        const result = await axios({
+            method: 'GET',
+            url: 'https://api-football-v1.p.rapidapi.com/v3/teams/statistics',
+            headers: {
+                'X-RapidAPI-Key': '64e1a0803emsh90496dace2b1354p1de268jsn1bb15e616fca',
+                'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+            },
+            params: {
+                league: '39',
+                season: '2020',
+                team: '33'
+            }
+        });
 
-const team = new Team({ league: 39, season: 2020, team: 33, data: result.data });
-await team.save();
+        const team = new Team({ league: 39, season: 2020, team: 33, data: result.data });
+        await team.save();
 
-res.send("OK");
-} catch (err) {
-    res.status(500).send(err);
+        res.send("OK");
+    } catch (err) {
+        res.status(500).send(err);
     } finally {
-    res.end();
+        res.end();
     }
-    }
-    
-    export default verifySignature(handler);
-    
-    export const config = {
-    api: {
-    bodyParser: false,
-    },
-    };
+}
 
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+};
+
+export default verifySignature(handler);
