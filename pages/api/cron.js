@@ -65,7 +65,7 @@ async function handler(_req, res) {
 
 
 
-module.exports = handler();
+module.exports = verifySignature(handler);
 
 module.exports.config = {
   api: {
