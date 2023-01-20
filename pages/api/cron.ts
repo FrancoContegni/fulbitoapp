@@ -15,10 +15,10 @@ mongoose.connect(URI_MONGO).then(() => {
 });
 
 const teamSchema = new mongoose.Schema({
-    league: Number,
-    season: Number,
-    team: Number,
-    data: {}
+    team: String,
+    form: String,
+    logo: String,
+    name: String
 });
 
 const Team = mongoose.model("Team", teamSchema);
