@@ -39,7 +39,12 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
             }
         });
 
-        const team = new Team({ league: 39, season: 2020, team: 33, data: JSON.stringify(result.data) });
+        const team = new Team({
+            team: result.data.parameters.team,
+            form: result.data.form,
+            logo: result.data.response.team.logo,
+            name: result.data.response.team.name
+        });
         await team.save();
 
         res.send("OK");
