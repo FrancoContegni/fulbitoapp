@@ -25,7 +25,7 @@ const Team = mongoose.model("Team", teamSchema);
 export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     try {
 
-        const equipo = '33'
+        const equipo = '30'
 const año = '2022'
 const liga = '39'
         const result = await axios({
