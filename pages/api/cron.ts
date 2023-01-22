@@ -22,6 +22,9 @@ const teamSchema = new mongoose.Schema({
 });
 
 const Team = mongoose.model("Team", teamSchema);
+const equipo = '30'
+const año = '2022'
+const liga = '39'
 
 export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     try {
@@ -33,9 +36,9 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
                 'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
             },
             params: {
-                league: '39',
-                season: '2020',
-                team: '33'
+                league: {liga},
+                season: {año},
+                team: {equipo}
             }
         });
 
