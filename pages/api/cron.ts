@@ -36,9 +36,9 @@ const liga = '39'
                 'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
             },
             params: {
-                league: {liga},
-                season: {año},
-                team: {equipo}
+                league: liga,
+                season: año,
+                team: equipo
             }
         });
 
