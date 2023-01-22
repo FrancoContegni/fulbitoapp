@@ -22,12 +22,12 @@ const teamSchema = new mongoose.Schema({
 });
 
 const Team = mongoose.model("Team", teamSchema);
-const equipo = '30'
-const año = '2022'
-const liga = '39'
-
 export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     try {
+
+        const equipo = '33'
+const año = '2022'
+const liga = '39'
         const result = await axios({
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/teams/statistics',
