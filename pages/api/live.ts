@@ -53,13 +53,12 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
                 league: fixture.league.name,
                 logo: fixture.league.logo,
                 home: fixture.teams.home.name,
-                away: fixture.teams.away.name
+                away: fixture.teams.away.name,
+                score: fixture.goals
             });
         });
         
-        for (const f of fixtures) {
-            await Fixture.updateMany({ id: f.id }, f, { upsert: true });
-        }
+        await Fixture.insertMany(fixtures);
 
         res.send("OK");
     } catch (err) {
