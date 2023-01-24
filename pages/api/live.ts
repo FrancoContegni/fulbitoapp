@@ -60,7 +60,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
         });
         
         for (const f of fixtures) {
-            await Fixture.updateMany({ _id: f.id }, f, { upsert: true });
+            await Fixture.updateMany({ id: f.id }, f, { upsert: true });
         }
 
         res.send("OK");
