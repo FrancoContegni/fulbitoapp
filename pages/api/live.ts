@@ -15,7 +15,7 @@ mongoose.connect(URI_MONGO).then(() => {
 });
 
 const fixtureSchema = new mongoose.Schema({
-    id: String,
+    id: Number,
     time: Number,
     status: String,
     league: String,
@@ -36,7 +36,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
             headers: {
-                'X-RapidAPI-Key': '64e1a0803emsh90496dace2b1354p1de268jsn1bb15e616fca',
+                'X-RapidAPI-Key': 'a977e895a9msh59ec2c8d6ff95dep13e1f2jsn84e6284515e3',
                 'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
             },
             params: {
@@ -56,7 +56,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
         });
         
         await fixture.save();
-        
+
         res.send("OK");
     } catch (err) {
         res.status(500).send(err);
