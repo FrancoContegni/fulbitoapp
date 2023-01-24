@@ -5,8 +5,8 @@ import { verifySignature } from "@upstash/qstash/nextjs";
 
 const MONGOURI = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority"
 
-const QSTASH_CURRENT_SIGNING_KEY = "sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2";
-const QSTASH_NEXT_SIGNING_KEY = "sig_5Xyzim7UERfyEoUzA39feZCDEkko";
+const QSTASH_CURRENT_SIGNING_KEY = process.env.QSTASH_CURRENT_SIGNING_KEY as string;
+const QSTASH_NEXT_SIGNING_KEY = process.env.QSTASH_NEXT_SIGNING_KEY as string;
 
 mongoose.connect(MONGOURI as string).then(() => {
     console.log('Database connected');
@@ -21,9 +21,13 @@ const teamSchema = new mongoose.Schema({
     form: String,
     logo: String,
     name: String
+    team: String,
+    form: String,
+    logo: String,
+    name: String
 });
 
-const Team = mongoose.model('Team', teamSchema);
+const Team = mongoose.model("Team", teamSchema);
 
 export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     try {
