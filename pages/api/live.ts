@@ -21,8 +21,7 @@ const fixtureSchema = new mongoose.Schema({
     league: String,
     logo: String,
     home: String,
-    away: String,
-    score: String
+    away: String
 });
 
 const Fixture = mongoose.model('Fixture', fixtureSchema);
@@ -54,8 +53,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
                 league: fixture.league.name,
                 logo: fixture.league.logo,
                 home: fixture.teams.home.name,
-                away: fixture.teams.away.name,
-                score: fixture.goals
+                away: fixture.teams.away.name
             });
         });
         
