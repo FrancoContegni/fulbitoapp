@@ -21,10 +21,6 @@ const teamSchema = new mongoose.Schema({
     form: String,
     logo: String,
     name: String
-    team: String,
-    form: String,
-    logo: String,
-    name: String
 });
 
 const Team = mongoose.model("Team", teamSchema);
