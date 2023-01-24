@@ -3,16 +3,18 @@ import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from "next";
 import { verifySignature } from "@upstash/qstash/nextjs";
 
-const URI_MONGO = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority"
+const MONGOURI = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority"
 
 process.env.QSTASH_CURRENT_SIGNING_KEY = "sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2";
 process.env.QSTASH_NEXT_SIGNING_KEY = "sig_5Xyzim7UERfyEoUzA39feZCDEkko";
 
-mongoose.connect(URI_MONGO).then(() => {
+mongoose.connect(MONGOURI as string).then(() => {
     console.log('Database connected');
 }).catch(err => {
     console.error(err);
 });
+
+
 
 const teamSchema = new mongoose.Schema({
     team: String,
@@ -25,6 +27,10 @@ const Team = mongoose.model('Team', teamSchema);
 
 export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     try {
+
+        const equipo = '33'
+        const año = '2022'
+        const liga = '39'
         const result = await axios({
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/teams/statistics',
@@ -33,9 +39,9 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
                 'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
             },
             params: {
-                league: '39',
-                season: '2020',
-                team: '33'
+                league: liga,
+                season: año,
+                team: equipo
             }
         });
 

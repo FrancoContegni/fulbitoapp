@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const axios = require("axios");
 const verifySignature = require("@upstash/qstash/nextjs").verifySignature;
 
-const URI_MONGO = "mongodb+srv://fotocopiero:A9xAsXwPH2RDLmlW@cluster0.6tfzzs5.mongodb.net/leagues?retryWrites=true&w=majority"
+const ENV_LOCAL_VARIABLE_URI_MONGO = process.env.ENV_LOCAL_VARIABLE_URI_MONGO;
+console.log(ENV_LOCAL_VARIABLE_URI_MONGO);
 
 process.env.QSTASH_CURRENT_SIGNING_KEY = "sig_5uZH86gYxAk8KXVDVkpVsj9KgdJ2";
 process.env.QSTASH_NEXT_SIGNING_KEY = "sig_5Xyzim7UERfyEoUzA39feZCDEkko";
@@ -10,7 +11,7 @@ verifySignature(handler);
 
 
 
-mongoose.connect(URI_MONGO).then(() => {
+mongoose.connect(process.env.ENV_LOCAL_VARIABLE_URI_MONGO).then(() => {
     console.log('Database connected');
 }).catch(err => {
     console.error(err);

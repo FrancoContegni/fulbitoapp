@@ -21,9 +21,11 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "environment.d.ts"
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "types": [ "node" ]
 }

@@ -2,9 +2,11 @@
 
 import Head from 'next/head'
 import conectarDB from '../lib/dbConnect';
-import england from '../models/england';
+import team from '../models/team'
 import React from 'react';
-export default function Home({englands}) {
+
+
+export default function Home({teams}) {
   
   return (
     <div>
@@ -16,7 +18,7 @@ export default function Home({englands}) {
       <p>Una gran ventaja que tenemos es que los datos de mongodb Atlas se pueden manipular</p>
       <h3>Ahora podés machacar el F5 tranquilamente chacal</h3>
       {
-        englands.map(({_id, team, logo, name}) => (
+        teams.map(({_id, team, logo, name}) => (
           <div key={_id}>
             <img src={logo}></img>
           <h5>{name}</h5>
@@ -29,19 +31,25 @@ export default function Home({englands}) {
   )
 }
 
+
+
 export async function getServerSideProps(){
   try{
     await conectarDB()
-    const res = await england.find({})
+    const res = await team.find({})
 
-    const englands = res.map(doc => {
-      const england = doc.toObject()
-      england._id = `${england._id}`
-      return england
+    const teams = res.map(doc => {
+      const team = doc.toObject()
+      team._id = `${team._id}`
+      return team
     })
-    //console.log(res)
-    return {props: {englands}}
+    console.log(res)
+    return {props: {teams}}
   } catch (error){
   console.log(error)
   }
+
+  console.log(process.env.ENV_LOCAL_VARIABLE_URI_MONGO);
 }
+
+
