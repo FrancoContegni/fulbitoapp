@@ -53,10 +53,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
             away: result.data.response.teams.away.name
         });
         
-        await Fixture.deleteMany({});
-
-        await Fixture.insertMany(fixture);
-
+        await fixture.save();
         res.send("OK");
     } catch (err) {
         res.status(500).send(err);
