@@ -15,6 +15,7 @@ mongoose.connect(URI_MONGO).then(() => {
 });
 
 const fixtureSchema = new mongoose.Schema({
+    id: Number,
     time: Number,
     status: String,
     league: String,
@@ -45,6 +46,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 
 
         const fixture = new Fixture({
+            id: result.data.response.fixture.id,
             time: result.data.response.fixture.timestamp,
             status: result.data.response.fixture.status.long,
             league: result.data.response.league.id,
@@ -53,7 +55,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
             away: result.data.response.teams.away.name
         });
         
-        await fixture.save();
+        await Fixture.insertMany(fixture);
 
         res.send("OK");
     } catch (err) {
