@@ -47,7 +47,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 
         const fixtures = result.data.response.map(fixture => {
             return new Fixture({
-                id: fixture.id,
+                id: fixture.fixture.id,
                 time: fixture.timestamp,
                 status: fixture.status.long,
                 league: fixture.league.name,
