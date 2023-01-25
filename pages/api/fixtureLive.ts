@@ -47,14 +47,13 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 
         const fixtures = result.data.response.map(fixture => {
             return new Live({
-                time: fixture.fixture.date,
+                time: fixture.timestamp,
                 status: fixture.status.long,
                 league: fixture.league.name,
                 logo: fixture.league.logo,
                 home: fixture.teams.home.name,
                 away: fixture.teams.away.name,
-                homeGoals: fixture.goals.home,
-                awayGoals: fixture.goals.away,
+                score: fixture.goals,
                 id: fixture.fixture.id
             });
         });
