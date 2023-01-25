@@ -15,12 +15,13 @@ mongoose.connect(URI_MONGO).then(() => {
 });
 
 const fixtureSchema = new mongoose.Schema({
-    id: Number,
+    time: String,
     status: String,
     league: String,
     logo: String,
     home: String,
-    away: String
+    away: String,
+    id: String
 });
 
 const Fixture = mongoose.model('Fixture', fixtureSchema);
@@ -46,14 +47,14 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 
         const fixtures = result.data.response.map(fixture => {
             return new Fixture({
-                id: fixture.fixture.id,
                 time: fixture.timestamp,
-                status: fixture.status.long,
+                status: fixture.status,
                 league: fixture.league.name,
                 logo: fixture.league.logo,
                 home: fixture.teams.home.name,
                 away: fixture.teams.away.name,
-                score: fixture.goals
+                score: fixture.goals,
+                id: fixture.fixture.id
             });
         });
         
