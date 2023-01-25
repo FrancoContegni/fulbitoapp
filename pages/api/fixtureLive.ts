@@ -57,12 +57,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
         });
         
         await live.save();
-        
-        
-        await Live.insertMany(fixtures);
-
-
-       
+               
 
         res.send("OK");
     } catch (err) {
