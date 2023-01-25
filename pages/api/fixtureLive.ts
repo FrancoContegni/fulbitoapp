@@ -15,12 +15,6 @@ mongoose.connect(URI_MONGO).then(() => {
 });
 
 const liveSchema = new mongoose.Schema({
-    time: String,
-    status: String,
-    league: String,
-    logo: String,
-    home: String,
-    away: String,
     id: String
 });
 
@@ -46,13 +40,6 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 
 
         const live = new Live({
-            time:  result.data.fixture.timestamp,
-            status:  result.data.fixture.status.long,
-            league:  result.data.fixture.league.name,
-            logo:  result.data.fixture.league.logo,
-            home:  result.data.fixture.teams.home.name,
-            away:  result.data.fixture.teams.away.name,
-            score:  result.data.fixture.goals,
             id:  result.data.fixture.fixture.id
         });
         
