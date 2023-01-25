@@ -45,21 +45,24 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
         });
 
 
-        const fixtures = result.data.response.map(fixture => {
-            return new Live({
-                time: fixture.timestamp,
-                status: fixture.status.long,
-                league: fixture.league.name,
-                logo: fixture.league.logo,
-                home: fixture.teams.home.name,
-                away: fixture.teams.away.name,
-                score: fixture.goals,
-                id: fixture.fixture.id
-            });
+        const live = new Live({
+            time:  result.data.fixture.timestamp,
+            status:  result.data.fixture.status.long,
+            league:  result.data.fixture.league.name,
+            logo:  result.data.fixture.league.logo,
+            home:  result.data.fixture.teams.home.name,
+            away:  result.data.fixture.teams.away.name,
+            score:  result.data.fixture.goals,
+            id:  result.data.fixture.fixture.id
         });
+        
+        await live.save();
         
         
         await Live.insertMany(fixtures);
+
+
+       
 
         res.send("OK");
     } catch (err) {
