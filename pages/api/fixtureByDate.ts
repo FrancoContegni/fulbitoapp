@@ -40,7 +40,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
                 'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
             },
             params: {
-                date: '2023-01-24'
+                date: '2023-01-25'
             }
         });
 
