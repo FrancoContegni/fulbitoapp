@@ -15,7 +15,7 @@ mongoose.connect(URI_MONGO).then(() => {
 });
 
 const fixtureSchema = new mongoose.Schema({
-    time: String,
+    id: Number,
     status: String,
     league: String,
     logo: String,
@@ -46,6 +46,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 
         const fixtures = result.data.response.map(fixture => {
             return new Fixture({
+                id: fixture.id,
                 time: fixture.timestamp,
                 status: fixture.status,
                 league: fixture.league.name,
