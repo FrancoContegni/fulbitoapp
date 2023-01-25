@@ -45,12 +45,12 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 
 
         const fixture = new Fixture({
-            time: result.data.response.fixture.timestamp,
-            status: result.data.response.fixture.status,
-            league: result.data.response.league.id,
-            logo: result.data.response.league.logo,
-            home: result.data.response.teams.home.name,
-            away: result.data.response.teams.away.name
+            time: result.data.response[0].fixture.timestamp,
+            status: result.data.response[0].fixture.status,
+            league: result.data.response[0].league.id,
+            logo: result.data.response[0].league.logo,
+            home: result.data.response[0].teams.home.name,
+            away: result.data.response[0].teams.away.name
         });
         
         await fixture.save();
