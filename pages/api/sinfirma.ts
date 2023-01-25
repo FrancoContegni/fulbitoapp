@@ -21,12 +21,36 @@ const liveSchema = new mongoose.Schema({
 const Live = mongoose.model('Live', liveSchema);
 
 
+function afuera() {
+    const options = {
+        method: 'GET',
+        url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
+        params: {id: '923276'},
+        headers: {
+            'X-RapidAPI-Key': '64e1a0803emsh90496dace2b1354p1de268jsn1bb15e616fca',
+            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+        },
+    };
+    axios 
+        .request(options)
+        .then(function (response: any) {
+            
+            console.log(response.data);
+        })
+        .catch(function (error: any) {
+            console.error(error);
+        });
+}
 
-export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
+afuera();
+
+
+
+
+export const handler = async (_req: NextApiRequest = null, res: NextApiResponse = null) => {
     try {
-
- 
         const result = await axios({
+            
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
             headers: {
@@ -36,15 +60,15 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
             params: {
                 id: '923276'
             },
-        });
+         });
+
 
 
         const live = new Live({
             id:  result.data.fixture.fixture.id
         });
         
-        await live.save();
-               
+        await live.save(); 
 
         res.send("OK");
     } catch (err) {
@@ -54,7 +78,7 @@ export const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     }
 }
 
-export default verifySignature(handler);
+export default handler();
 
 export const config = {
     api: {
